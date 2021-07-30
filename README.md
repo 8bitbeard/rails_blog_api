@@ -1,7 +1,7 @@
 # README
 
 # Introduction
-This project was made while following the course of Ruby on Rails 6 - Atenticação via API, from Paulo Melo (https://github.com/peimelo)
+This project was made while following the course of `Ruby on Rails 6 - Atenticação via API`, from Paulo Melo (https://github.com/peimelo)
 
 # Techs Used in the project
 - Rails
