@@ -1,24 +1,31 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Introduction
+This project was made while following the course of Ruby on Rails 6 - Atenticação via API, from Paulo Melo (https://github.com/peimelo)
 
-Things you may want to cover:
+# Techs Used in the project
+- Rails
+- Devise
 
-* Ruby version
+## Initial settings to run the project
 
-* System dependencies
+```bash
+# Clone the project
+git clone https://github.com/8bitbeard/rails_blog_api.git
 
-* Configuration
+# Enter the cloned directory
+cd blog_api
 
-* Database creation
+# Install project dependencies   
 
-* Database initialization
+# Create the development and test databases
+rails db:create
 
-* How to run the test suite
+# Create the tables
+rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+# Run the Project
+rails s
+```
 
-* Deployment instructions
-
-* ...
+The backend is available at `http://localhost:3000`
