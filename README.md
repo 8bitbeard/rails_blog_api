@@ -17,6 +17,7 @@ git clone https://github.com/8bitbeard/rails_blog_api.git
 cd blog_api
 
 # Install project dependencies   
+bundle install
 
 # Create the development and test databases
 rails db:create
