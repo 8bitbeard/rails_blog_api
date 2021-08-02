@@ -14,9 +14,18 @@ gem "rack-cors", "~> 1.1"
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem "rspec-rails", "~> 5.0"
+  gem "factory_bot_rails", "~> 6.2"
+  gem "faker", "~> 2.18"
 end
 
 group :development do
   gem "letter_opener", "~> 1.7"
+end
+
+group :test do
+  gem "shoulda-matchers", "~> 5.0"
+  gem "simplecov", "~> 0.21.2", require: false
+  gem "database_cleaner-active_record", "~> 2.0"
 end
 
