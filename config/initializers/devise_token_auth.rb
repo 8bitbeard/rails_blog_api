@@ -5,7 +5,7 @@ DeviseTokenAuth.setup do |config|
   # client is responsible for keeping track of the changing tokens. Change
   # this to false to prevent the Authorization header from changing after
   # each request.
-  config.change_headers_on_each_request = false
+  config.change_headers_on_each_request = Rails.env.production? ? true : false
 
   # By default, users will need to re-authenticate after 2 weeks. This setting
   # determines how long tokens will remain valid after they are issued.
@@ -58,9 +58,17 @@ DeviseTokenAuth.setup do |config|
   # send email, set it to true. (This is a setting for compatibility)
   config.send_confirmation_email = true
 
-  config.default_confirm_success_url = 'http://localhost:4200/login'
+  config.default_confirm_success_url = if Rails.env.production?
+                                         'https://rails-blogapi.herokuapp.com/login'
+                                       else
+                                         'http://localhost:4200/login'
+                                       end
 
-  config.default_password_reset_url = 'http://localhost:4200/reset-password'
+  config.default_password_reset_url = if Rails.env.production?
+                                          'https://rails-blogapi.herokuapp.com/reset-password'
+                                      else
+                                        'http://localhost:4200/reset-password'
+                                      end
 
   config.remove_tokens_after_password_reset = true
 end
