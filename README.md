@@ -30,3 +30,13 @@ rails s
 ```
 
 The backend is available at `http://localhost:3000`
+
+## Tests
+![Tests](https://github.com/8bitbeard/rails_blog_api/actions/workflows/ruby.yml/badge.svg)
+
+To run the tests:
+
+```bash
+# Run the following command on the root of the project
+rspec
+```
