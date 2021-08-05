@@ -58,17 +58,9 @@ DeviseTokenAuth.setup do |config|
   # send email, set it to true. (This is a setting for compatibility)
   config.send_confirmation_email = true
 
-  config.default_confirm_success_url = if Rails.env.production?
-                                         'https://rails-blogapi.herokuapp.com/login'
-                                       else
-                                         'http://localhost:4200/login'
-                                       end
+  config.default_confirm_success_url = Rails.env.production? ? 'https://rails-blogapi.herokuapp.com/login' : 'http://localhost:4200/login'
 
-  config.default_password_reset_url = if Rails.env.production?
-                                          'https://rails-blogapi.herokuapp.com/reset-password'
-                                      else
-                                        'http://localhost:4200/reset-password'
-                                      end
+  config.default_password_reset_url = Rails.env.production? ? 'https://rails-blogapi.herokuapp.com/reset-password' : 'http://localhost:4200/reset-password'
 
   config.remove_tokens_after_password_reset = true
 end

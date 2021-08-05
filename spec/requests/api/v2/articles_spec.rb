@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 # rubocop:disable Metrics/BlockLength
-RSpec.describe 'Articles', type: :request do
+RSpec.describe 'V2 Articles', type: :request do
   let(:user) { create :user }
   let(:user_two) { create :user }
   let(:article) { create :article, user: user }
@@ -24,6 +24,11 @@ RSpec.describe 'Articles', type: :request do
 
       get api_articles_url, headers: {}, as: :json
       expect(json_response.size).to eq 2
+    end
+
+    it 'renders a empty list' do
+      get api_articles_url, headers: {}, as: :json
+      expect(json_response.size).to eq 0
     end
   end
 
