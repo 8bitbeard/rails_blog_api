@@ -1,7 +1,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
 SimpleCov.start do
-  minimum_coverage 98
+  minimum_coverage 95
   maximum_coverage_drop 2
   add_group 'Config', 'config'
   add_group 'Controllers', 'app/controllers'
