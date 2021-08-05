@@ -1,6 +1,7 @@
 module Api
   module V1
     class ArticlesController < ApplicationController
+      before_action :authenticate_api_user!, except: [:index]
       before_action :set_article, only: %i[show update destroy]
 
       # GET /articles
@@ -17,7 +18,7 @@ module Api
 
       # POST /articles
       def create
-        @article = Article.new(article_params)
+        @article = current_api_user.articles.new(article_params)
 
         if @article.save
           render json: @article, status: :created, location: api_article_url(@article)
@@ -44,7 +45,7 @@ module Api
 
       # Use callbacks to share common setup or constraints between actions.
       def set_article
-        @article = Article.find(params[:id])
+        @article = current_api_user.articles.find_by_id!(params[:id])
       end
 
       # Only allow a list of trusted parameters through.
