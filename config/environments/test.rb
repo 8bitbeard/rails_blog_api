@@ -56,4 +56,11 @@ Rails.application.configure do
 
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
+
+  # Letter Opener
+  # config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.perform_deliveries = true
+
+  # Devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000  }
 end
