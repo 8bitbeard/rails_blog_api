@@ -1,8 +1,7 @@
-
 require 'rails_helper'
 
 RSpec.describe 'Confirmations', type: :request do
-  let (:user) { create :user }
+  let(:user) { create :user }
 
   describe 'POST /create' do
     it 're-sends confirmation' do

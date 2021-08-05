@@ -1,6 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Articles", type: :request do
+# rubocop:disable Metrics/BlockLength
+RSpec.describe 'Articles', type: :request do
   let(:user) { create :user }
   let(:user_two) { create :user }
   let(:article) { create :article, user: user }
@@ -11,7 +12,7 @@ RSpec.describe "Articles", type: :request do
 
   let(:valid_headers) { user.create_new_auth_token }
 
-  describe "GET /articles" do
+  describe 'GET /articles' do
     it 'renders a successful response' do
       get api_articles_url, headers: {}, as: :json
       expect(response).to have_http_status(:success)
@@ -101,19 +102,17 @@ RSpec.describe "Articles", type: :request do
       let(:new_attributes) { attributes_for :article }
 
       it 'updates the requested article' do
-        put api_article_url(article),
-            params: { article: new_attributes },
-            headers: valid_headers,
-            as: :json
+        put api_article_url(article), params: {
+          article: new_attributes
+        }, headers: valid_headers, as: :json
         article.reload
         expect(article.title).to eq(new_attributes[:title])
       end
 
       it 'renders a JSON response with the article' do
-        put api_article_url(article),
-            params: { article: new_attributes },
-            headers: valid_headers,
-            as: :json
+        put api_article_url(article), params: {
+          article: new_attributes
+        }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:ok)
         expect(response.content_type).to match(a_string_including('application/json'))
       end
@@ -121,10 +120,9 @@ RSpec.describe "Articles", type: :request do
 
     context 'with invalid parameters' do
       it 'renders a JSON response with errors for the article' do
-        put api_article_url(article),
-            params: { article: invalid_attributes },
-            headers: valid_headers,
-            as: :json
+        put api_article_url(article), params: {
+          article: invalid_attributes
+        }, headers: valid_headers, as: :json
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.content_type).to eq('application/json; charset=utf-8')
       end
@@ -138,10 +136,9 @@ RSpec.describe "Articles", type: :request do
 
     it_behaves_like 'user not logged in' do
       let(:url) do
-        put api_article_url(article),
-             params: { article: valid_attributes },
-             headers: {},
-             as: :json
+        put api_article_url(article), params: {
+          article: valid_attributes
+        }, headers: {}, as: :json
       end
     end
   end
@@ -167,3 +164,4 @@ RSpec.describe "Articles", type: :request do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

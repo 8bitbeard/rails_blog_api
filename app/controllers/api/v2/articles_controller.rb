@@ -42,15 +42,16 @@ module Api
       end
 
       private
-        # Use callbacks to share common setup or constraints between actions.
-        def set_article
-          @article = current_api_user.articles.find_by_id!(params[:id])
-        end
 
-        # Only allow a list of trusted parameters through.
-        def article_params
-          params.require(:article).permit(:title, :body)
-        end
+      # Use callbacks to share common setup or constraints between actions.
+      def set_article
+        @article = current_api_user.articles.find_by_id!(params[:id])
+      end
+
+      # Only allow a list of trusted parameters through.
+      def article_params
+        params.require(:article).permit(:title, :body)
+      end
     end
   end
 end

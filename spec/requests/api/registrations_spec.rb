@@ -1,5 +1,6 @@
 require 'rails_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe 'Registrations', type: :request do
   let(:user) { create :user }
   let(:valid_attributes) { attributes_for :user }
@@ -16,8 +17,9 @@ RSpec.describe 'Registrations', type: :request do
     let(:new_name) { Faker::Name.name }
 
     it 'updates the user' do
-      put '/api/auth',
-        params: { name: new_name }, headers: user.create_new_auth_token, as: :json
+      put '/api/auth', params: {
+        name: new_name
+      }, headers: user.create_new_auth_token, as: :json
       user.reload
       expect(user.name).to eq(new_name)
       expect(response).to have_http_status(:ok)
@@ -34,3 +36,4 @@ RSpec.describe 'Registrations', type: :request do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
