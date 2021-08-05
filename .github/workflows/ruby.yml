@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests:
-    name: Tests
+    name: Unit Tests
     runs-on: ubuntu-latest
 
     services:
@@ -47,6 +47,52 @@ jobs:
           POSTGRES_DB: rails_github_actions_test
           POSTGRES_USER: rails_github_actions
           POSTGRES_PASSWORD: postgres
+        run: |
+          cp config/database.ci.yml config/database.yml
+          bundle exec rails db:schema:load
+          bundle exec rspec --format progress
+
+  coverage:
+    name: Code Quality Coverage
+    runs-on: ubuntu-latest
+    needs: [test]
+
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_DB: rails_github_actions_test
+          POSTGRES_USER: rails_github_actions
+          POSTGRES_PASSWORD: postgres
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.3
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get -yqq install libpq-dev build-essential libcurl4-openssl-dev
+          bundle install --jobs 4 --retry 3
+
+      - name: Run Tests
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          POSTGRES_DB: rails_github_actions_test
+          POSTGRES_USER: rails_github_actions
+          POSTGRES_PASSWORD: postgres
+          COVERAGE: true
         run: |
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load

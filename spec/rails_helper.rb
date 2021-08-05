@@ -1,14 +1,17 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
-SimpleCov.start do
-  minimum_coverage 95
-  maximum_coverage_drop 2
-  add_group 'Config', 'config'
-  add_group 'Controllers', 'app/controllers'
-  add_group 'Libs', 'lib'
-  add_group 'Models', 'app/models'
-  add_group 'Serializers', 'app/serializers'
-  add_group 'Specs', 'spec'
+
+if ENV['COVERAGE']
+  SimpleCov.start do
+    minimum_coverage 95
+    maximum_coverage_drop 2
+    add_group 'Config', 'config'
+    add_group 'Controllers', 'app/controllers'
+    add_group 'Libs', 'lib'
+    add_group 'Models', 'app/models'
+    add_group 'Serializers', 'app/serializers'
+    add_group 'Specs', 'spec'
+  end
 end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
