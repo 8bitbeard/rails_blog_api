@@ -1,14 +1,16 @@
 module Api
   module V2
     class ArticlesController < ApplicationController
+      include Paginable
+
       before_action :authenticate_api_user!, except: [:index]
       before_action :set_article, only: %i[show update destroy]
 
       # GET /articles
       def index
-        @articles = Article.all
+        @articles = Article.page(current_page).per(per_page)
 
-        render json: @articles
+        render json: @articles, meta: meta_attributes(@articles), adapter: :json
       end
 
       # GET /articles/1

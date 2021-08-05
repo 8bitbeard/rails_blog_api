@@ -26,9 +26,19 @@ RSpec.describe 'V2 Articles', type: :request do
       expect(json_response.size).to eq 2
     end
 
-    it 'renders a empty list' do
+    it 'renders an empty list' do
       get api_articles_url, headers: {}, as: :json
-      expect(json_response.size).to eq 0
+      expect(json_response[:articles].size).to eq 0
+    end
+
+    it 'renders the pagination data on the response' do
+      article
+
+      get api_articles_url, params: { page: 2, size: 10 }, headers: {}
+      expect(response).to have_http_status(:success)
+      expect(json_response[:meta][:currentPage]).to eq(2)
+      expect(json_response[:meta][:itemsPerPage]).to eq(10)
+      expect(json_response[:meta][:totalItems]).to eq(1)
     end
   end
 
