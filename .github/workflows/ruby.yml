@@ -97,3 +97,16 @@ jobs:
           cp config/database.ci.yml config/database.yml
           bundle exec rails db:schema:load
           bundle exec rspec --format progress
+
+  build:
+    name: Heroku Deploy
+    runs-on: ubuntu-latest
+    needs: [coverage]
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "rails-blogapi" #Must be unique in Heroku
+          heroku_email: "willsouzafilho@gmail.com"
