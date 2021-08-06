@@ -8,7 +8,8 @@ module Api
 
       # GET /articles
       def index
-        @articles = Article.sorted(params[:sort], params[:dir])
+        @articles = Article.includes(:user)
+                           .sorted(params[:sort], params[:dir])
                            .page(current_page)
                            .per(per_page)
 

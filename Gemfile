@@ -22,6 +22,7 @@ group :development, :test do
 end
 
 group :development do
+  gem "bullet", "~> 6.1"
   gem 'letter_opener', '~> 1.7'
 end
 
@@ -30,3 +31,4 @@ group :test do
   gem 'shoulda-matchers', '~> 5.0'
   gem 'simplecov', '~> 0.21.2', require: false
 end
+
